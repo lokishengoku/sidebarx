@@ -128,7 +128,7 @@ class ExampleSidebarX extends StatelessWidget {
         return SizedBox(
           height: 100,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(2),
             child: Image.asset('assets/images/avatar.png'),
           ),
         );

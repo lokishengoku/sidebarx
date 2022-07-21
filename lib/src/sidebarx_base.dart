@@ -159,19 +159,14 @@ class _SidebarXState extends State<SidebarX>
         widget.controller.toggleExtended();
       },
       child: Row(
-        mainAxisAlignment: widget.controller.extended
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Icon(
-              widget.controller.extended
-                  ? Icons.arrow_back_ios_new
-                  : Icons.arrow_forward_ios,
-              color: sidebarXTheme.iconTheme?.color,
-              size: sidebarXTheme.iconTheme?.size,
-            ),
+          Icon(
+            widget.controller.extended
+                ? Icons.arrow_back_ios_new
+                : Icons.arrow_forward_ios,
+            color: sidebarXTheme.iconTheme?.color,
+            size: sidebarXTheme.iconTheme?.size,
           ),
         ],
       ),

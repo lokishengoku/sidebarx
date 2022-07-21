@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SidebarXTheme {
   const SidebarXTheme({
-    this.width = 70,
+    this.width = 46,
     this.height = double.infinity,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
