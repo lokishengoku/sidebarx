@@ -51,39 +51,42 @@ class _SidebarXCellState extends State<SidebarXCell> {
     final textPadding =
         widget.selected ? theme.selectedItemTextPadding : theme.itemTextPadding;
 
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        decoration: decoration,
-        padding: padding ?? const EdgeInsets.all(8),
-        margin: margin ?? const EdgeInsets.all(4),
-        child: Row(
-          mainAxisAlignment: widget.extended
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.center,
-          children: [
-            AnimatedSize(
-              duration: widget.animationController.duration ??
-                  const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              child: SizedBox(
-                width: widget.extended
-                    ? theme.expandedLeftIconSpace
-                    : theme.leftIconSpace,
-              ),
-            ),
-            if (widget.item.icon != null)
-              _Icon(item: widget.item, iconTheme: iconTheme)
-            else if (widget.item.iconWidget != null)
-              widget.item.iconWidget!,
-            Expanded(
-              child: AnimatedSwitcher(
+    return Container(
+      decoration: decoration,
+      margin: margin ?? const EdgeInsets.all(4),
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: decoration?.borderRadius?.resolve(TextDirection.ltr),
+        child: Padding(
+          padding: padding ?? const EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: widget.extended
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.center,
+            children: [
+              AnimatedSize(
                 duration: widget.animationController.duration ??
                     const Duration(milliseconds: 300),
-                child: _label(textStyle, textPadding),
+                curve: Curves.easeInOut,
+                child: SizedBox(
+                  width: widget.extended
+                      ? theme.expandedLeftIconSpace
+                      : theme.leftIconSpace,
+                ),
               ),
-            ),
-          ],
+              if (widget.item.icon != null)
+                _Icon(item: widget.item, iconTheme: iconTheme)
+              else if (widget.item.iconWidget != null)
+                widget.item.iconWidget!,
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: widget.animationController.duration ??
+                      const Duration(milliseconds: 300),
+                  child: _label(textStyle, textPadding),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
