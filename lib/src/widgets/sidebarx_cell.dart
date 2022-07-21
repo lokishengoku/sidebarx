@@ -31,7 +31,7 @@ class _SidebarXCellState extends State<SidebarXCell> {
     super.initState();
     _animation = CurvedAnimation(
       parent: widget.animationController,
-      curve: Curves.easeInOut,
+      curve: Curves.easeIn,
     );
   }
 
@@ -51,7 +51,7 @@ class _SidebarXCellState extends State<SidebarXCell> {
     final textPadding =
         widget.selected ? theme.selectedItemTextPadding : theme.itemTextPadding;
 
-    return GestureDetector(
+    return InkWell(
       onTap: widget.onTap,
       child: Container(
         decoration: decoration,
@@ -62,39 +62,46 @@ class _SidebarXCellState extends State<SidebarXCell> {
               ? MainAxisAlignment.start
               : MainAxisAlignment.center,
           children: [
-            // AnimatedBuilder(
-            //   animation: _animation,
-            //   builder: (context, _) {
-            //     final value = ((1 - _animation.value) * 6).toInt();
-            //     if (value <= 0) {
-            //       return const SizedBox();
-            //     }
-            //     return Spacer(flex: value);
-            //   },
-            // ),
+            AnimatedSize(
+              duration: widget.animationController.duration ??
+                  const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: SizedBox(
+                width: widget.extended
+                    ? theme.expandedLeftIconSpace
+                    : theme.leftIconSpace,
+              ),
+            ),
             if (widget.item.icon != null)
               _Icon(item: widget.item, iconTheme: iconTheme)
             else if (widget.item.iconWidget != null)
               widget.item.iconWidget!,
             Expanded(
-              flex: 6,
-              child: FadeTransition(
-                opacity: _animation,
-                child: Padding(
-                  padding: textPadding ?? EdgeInsets.zero,
-                  child: Text(
-                    widget.item.label ?? '',
-                    style: textStyle,
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
-                  ),
-                ),
+              child: AnimatedSwitcher(
+                duration: widget.animationController.duration ??
+                    const Duration(milliseconds: 300),
+                child: _label(textStyle, textPadding),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _label(TextStyle? textStyle, EdgeInsets? textPadding) {
+    if (widget.extended) {
+      return Padding(
+        padding: textPadding ?? EdgeInsets.zero,
+        child: Text(
+          widget.item.label ?? '',
+          style: textStyle,
+          overflow: TextOverflow.fade,
+          maxLines: 1,
+        ),
+      );
+    }
+    return const SizedBox();
   }
 }
 
