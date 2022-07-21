@@ -78,7 +78,7 @@ class _SidebarXCellState extends State<SidebarXCell> {
                 _Icon(item: widget.item, iconTheme: iconTheme)
               else if (widget.item.iconWidget != null)
                 widget.item.iconWidget!,
-              Expanded(
+              Flexible(
                 child: AnimatedSwitcher(
                   duration: widget.animationController.duration ??
                       const Duration(milliseconds: 300),

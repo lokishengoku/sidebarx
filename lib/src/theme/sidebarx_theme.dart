@@ -19,7 +19,7 @@ class SidebarXTheme {
     this.selectedItemPadding,
     this.itemTextPadding,
     this.selectedItemTextPadding,
-    this.leftIconSpace = 10,
+    this.leftIconSpace = 0,
     this.expandedLeftIconSpace = 15,
   });
 
