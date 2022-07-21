@@ -93,11 +93,20 @@ class _SidebarXCellState extends State<SidebarXCell> {
     if (widget.extended) {
       return Padding(
         padding: textPadding ?? EdgeInsets.zero,
-        child: Text(
-          widget.item.label ?? '',
-          style: textStyle,
-          overflow: TextOverflow.fade,
-          maxLines: 1,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                widget.item.label ?? '',
+                style: textStyle,
+                overflow: TextOverflow.fade,
+                maxLines: 1,
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
         ),
       );
     }
