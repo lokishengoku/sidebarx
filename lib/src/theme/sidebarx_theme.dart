@@ -19,8 +19,8 @@ class SidebarXTheme {
     this.selectedItemPadding,
     this.itemTextPadding,
     this.selectedItemTextPadding,
-    this.leftIconSpace = 0,
-    this.expandedLeftIconSpace = 15,
+    this.iconPadding = EdgeInsets.zero,
+    this.expandedIconPadding = EdgeInsets.zero,
   });
 
   /// [SidebarX] width
@@ -74,8 +74,8 @@ class SidebarXTheme {
   /// Selected item [SidebarXItem] text padding
   final EdgeInsets? selectedItemTextPadding;
 
-  final double leftIconSpace;
-  final double expandedLeftIconSpace;
+  final EdgeInsets iconPadding;
+  final EdgeInsets expandedIconPadding;
 
   /// Method to get default flutter theme settings
   SidebarXTheme mergeFlutterTheme(BuildContext context) {

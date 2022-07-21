@@ -60,24 +60,16 @@ class _SidebarXCellState extends State<SidebarXCell> {
         child: Padding(
           padding: padding ?? const EdgeInsets.all(8),
           child: Row(
-            mainAxisAlignment: widget.extended
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AnimatedSize(
+              AnimatedPadding(
+                padding: widget.extended
+                    ? theme.expandedIconPadding
+                    : theme.iconPadding,
                 duration: widget.animationController.duration ??
                     const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child: SizedBox(
-                  width: widget.extended
-                      ? theme.expandedLeftIconSpace
-                      : theme.leftIconSpace,
-                ),
+                child: _icon(iconTheme),
               ),
-              if (widget.item.icon != null)
-                _Icon(item: widget.item, iconTheme: iconTheme)
-              else if (widget.item.iconWidget != null)
-                widget.item.iconWidget!,
               Flexible(
                 child: AnimatedSwitcher(
                   duration: widget.animationController.duration ??
@@ -90,6 +82,17 @@ class _SidebarXCellState extends State<SidebarXCell> {
         ),
       ),
     );
+  }
+
+  Widget _icon(IconThemeData? iconTheme) {
+    if (widget.item.icon != null) {
+      return _Icon(item: widget.item, iconTheme: iconTheme);
+    } else {
+      if (widget.item.iconWidget != null) {
+        return widget.item.iconWidget!;
+      }
+      return const SizedBox();
+    }
   }
 
   Widget _label(TextStyle? textStyle, EdgeInsets? textPadding) {
