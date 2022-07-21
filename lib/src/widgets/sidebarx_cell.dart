@@ -31,7 +31,7 @@ class _SidebarXCellState extends State<SidebarXCell> {
     super.initState();
     _animation = CurvedAnimation(
       parent: widget.animationController,
-      curve: Curves.easeIn,
+      curve: Curves.easeInOut,
     );
   }
 
@@ -62,21 +62,21 @@ class _SidebarXCellState extends State<SidebarXCell> {
               ? MainAxisAlignment.start
               : MainAxisAlignment.center,
           children: [
-            AnimatedBuilder(
-              animation: _animation,
-              builder: (context, _) {
-                final value = ((1 - _animation.value) * 6).toInt();
-                if (value <= 0) {
-                  return const SizedBox();
-                }
-                return Spacer(flex: value);
-              },
-            ),
+            // AnimatedBuilder(
+            //   animation: _animation,
+            //   builder: (context, _) {
+            //     final value = ((1 - _animation.value) * 6).toInt();
+            //     if (value <= 0) {
+            //       return const SizedBox();
+            //     }
+            //     return Spacer(flex: value);
+            //   },
+            // ),
             if (widget.item.icon != null)
               _Icon(item: widget.item, iconTheme: iconTheme)
             else if (widget.item.iconWidget != null)
               widget.item.iconWidget!,
-            Flexible(
+            Expanded(
               flex: 6,
               child: FadeTransition(
                 opacity: _animation,
