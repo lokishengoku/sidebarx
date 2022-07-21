@@ -51,7 +51,7 @@ class _SidebarXCellState extends State<SidebarXCell> {
     final textPadding =
         widget.selected ? theme.selectedItemTextPadding : theme.itemTextPadding;
 
-    return InkWell(
+    return GestureDetector(
       onTap: widget.onTap,
       child: Container(
         decoration: decoration,
